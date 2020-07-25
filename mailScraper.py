@@ -37,7 +37,7 @@ msg["Subject"] = "News Summary"
 msg["From"] = user
 msg["To"] = to
 
-msg.attach(MIMEText(news, 'plain'))
+msg.attach(MIMEText(news, 'plain'))#the message is attached here
 
 try:
     server = smtplib.SMTP_SSL('mail.gmx.net', 465) #preset for GMX mail accounts
