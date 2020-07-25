@@ -1,0 +1,1 @@
+# Galva101-Python-Scraper-Mail-Sender
