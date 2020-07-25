@@ -14,7 +14,7 @@ for new in result:
     new = new.text.strip()
     new = new.replace("\n", " ")
     new = new.replace("\t", "")
-    if not len(new)<=15: #Minimum Headline Length
+    if not len(new)<=15: #Minimum Length for a Headline
         news += ("%s - \t " % i)
         news += new
         news += "\n"
@@ -27,9 +27,10 @@ for new in result:
 #news = news.replace("é", "e")
 #news = news.replace("è", "e")
 
+
 user = ""  # Enter your Email address
 password = ""  # Enter your Email pasword
-to = recipients = ["", ]  # Enter the Recipients
+to = ["", ]  # Enter the Recipients
 subject = "News Summary"
 
 msg = MIMEMultipart("alternative")
