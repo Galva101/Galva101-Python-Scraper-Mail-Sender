@@ -22,7 +22,11 @@ for new in headlines:
     news += ("%s - \t " % i)
     new = new.text.strip()
     new = new.replace("\n", " ")
-    news += new + " https://www.spieletipps.de{}".format(links[i-1])
+    news += new 
+    try:
+        news += " https://www.spieletipps.de{}".format(links[i-1])
+    except:
+        print("formatting error at "+new+" ignoring...")
     news += "\n"
     if (i%5==0):
         news += "\n"
