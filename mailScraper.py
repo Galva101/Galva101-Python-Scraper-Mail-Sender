@@ -27,17 +27,17 @@ for new in result:
 #news = news.replace("é", "e")
 #news = news.replace("è", "e")
 
-
-user = ""  # Enter your Email address
+user = ""  # Enter the Email address that will send the text
+name = "ScraPy" # Enter the name that will be displayed in the recipient's inbox
 password = ""  # Enter your Email pasword
 to = ["", ]  # Enter the Recipients
-subject = "News Summary"
+subject = "News Update"
 
 msg = MIMEMultipart("alternative")
 msg.set_charset("utf-8")
 
 msg["Subject"] = subject
-msg["From"] = user
+msg["From"] = "{} <{}>".format(name, user)
 msg["To"] = ", ".join(to)
 
 msg.attach(MIMEText(news, "plain"))#the message is attached here
