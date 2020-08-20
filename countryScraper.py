@@ -73,7 +73,7 @@ try:
     server = smtplib.SMTP_SSL("mail.gmx.net", 465) #preset for GMX mail accounts
     server.ehlo()
     server.login(user, password)
-    #server.sendmail(user, to, msg.as_string())
+    server.sendmail(user, to, msg.as_string())
     server.close()
     print("email sent")
 except:
