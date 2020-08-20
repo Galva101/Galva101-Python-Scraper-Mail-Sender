@@ -4,11 +4,25 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+#Die Zahl der Neuinfektionen pro 100 000 Personen beträgt im betreffenden Staat oder Gebiet in
+#den letzten 14 Tagen mehr als 60.
+
 franceUrl = "https://www.ecdc.europa.eu/en/cases-2019-ncov-eueea"
 news = ""
 
 FranceR = requests.get(franceUrl)
 FranceSoup = BeautifulSoup(FranceR.text, "html.parser")
+
+date = "date error"
+try:
+    date = FranceSoup.find("h1", attrs={}).get_text().strip()
+    date = date.split("as of")
+    date = date[1].strip()
+    date += "\n"
+except:
+    pass
+
+news+=date
 
 data = []
 table = FranceSoup.find('table', attrs={})
@@ -21,6 +35,7 @@ for row in rows:
     data.append([ele for ele in cols]) 
 
 for line in data:
+    #print(line)
     if( line[0] in ["France", "Italy", "Germany"] ):        
         france = 'Country:\t {} \nSum of Cases:\t {} \nSum of Deaths:\t {} \n14-day cumulative number of COVID-19 cases per 100 000:\t{}\n\n'.format(line[0], line[1], line[2], line[3])
         if( float(line[3]) >60):
@@ -49,10 +64,9 @@ except:
     
 news = news.replace("\n\n\n\n", "\n\n")
 
-if( ("Brasilien" or "frankreich" or "frank" or "Frank" )in news):
+if( ("Frankreich" or "frankreich" or "frank" or "Frank" )in news):
     news = "FRANKREICH IST IN LISTE GENANNT!!!\n\n\n" + news
-print(news)        
-        
+print(news)         
 
 user = ""  # Enter the Email address that will send the text
 name = "ScraPi" # Enter the name that will be displayed in the recipient's inbox
